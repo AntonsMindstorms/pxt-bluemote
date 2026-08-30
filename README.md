@@ -18,6 +18,16 @@ Adding this extension replaces **Radio** with **Bluetooth**. That is a MakeCode 
 
 The extension requests open (no-pairing) Bluetooth. If the micro:bit still asks to pair, set **No pairing required** in project settings and download again.
 
+## micro:bit v1 (error 020)
+
+Bluetooth on the original micro:bit (16KB RAM) is extremely tight. Error **020** is out of memory.
+
+This extension already strips unused BLE services (DFU, event, device info, partial flashing) and does not start a background poller on v1. A program that only starts BlueMote and reads sticks/buttons can fit.
+
+Headroom is still tiny. A motor extension, `showString`, extra `forever` loops, or other Bluetooth services can push v1 over the edge. **v2 is the practical target** for robot projects; treat v1 as best-effort.
+
+On v1, sticks and buttons update when you read them (put those blocks in **forever**). An empty forever loop will not drain UART.
+
 ## Usage
 
 Same idea without a motor extension — plot the left stick and honk on A:

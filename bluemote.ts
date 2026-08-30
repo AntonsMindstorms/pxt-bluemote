@@ -79,6 +79,7 @@ namespace bluemote {
     }
 
     function poll(): void {
+        if (!started) return
         let chunk = bluetooth.uartReadBuffer()
         if (chunk.length > 0) {
             ingest(chunk)
@@ -96,12 +97,16 @@ namespace bluemote {
         if (started) return
         started = true
         bluetooth.startUartService()
-        control.inBackground(function () {
-            while (true) {
-                poll()
-                basic.pause(5)
-            }
-        })
+        // A background fiber costs ~1.2KB of stack. micro:bit v1 cannot
+        // afford that on top of BLE; reads poll UART instead.
+        if (control.hardwareVersion() != "1") {
+            control.inBackground(function () {
+                while (true) {
+                    poll()
+                    basic.pause(20)
+                }
+            })
+        }
     }
 
     /**
@@ -111,6 +116,7 @@ namespace bluemote {
     //% blockId=bluemote_button_pressed
     //% weight=90
     export function buttonIsPressed(btn: BlueMoteButton): boolean {
+        poll()
         return (buttonMask & (1 << btn)) != 0
     }
 
@@ -122,6 +128,7 @@ namespace bluemote {
     //% blockId=bluemote_stick_value
     //% weight=80
     export function stickValue(axis: BlueMoteStick): number {
+        poll()
         switch (axis) {
             case BlueMoteStick.LeftX:
                 return leftX
