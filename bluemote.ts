@@ -38,6 +38,7 @@ enum BlueMoteStick {
  * Receive BlueMote gamepad packets over Bluetooth UART.
  */
 //% color="#684F8E" weight=80 icon="\uf11b"
+//% groups='["Service", "Input"]'
 namespace bluemote {
     const PACKET_LEN = 11
 
@@ -91,6 +92,8 @@ namespace bluemote {
      */
     //% block="BlueMote service"
     //% blockId=bluemote_service
+    //% help=github:bluemote/docs/start-service
+    //% group="Service"
     //% weight=100
     export function startService(): void {
         if (started) return
@@ -106,9 +109,12 @@ namespace bluemote {
 
     /**
      * True when the given BlueMote button is currently pressed.
+     * @param btn the BlueMote button to check
      */
     //% block="button %btn is pressed"
     //% blockId=bluemote_button_pressed
+    //% help=github:bluemote/docs/button-is-pressed
+    //% group="Input"
     //% weight=90
     export function buttonIsPressed(btn: BlueMoteButton): boolean {
         return (buttonMask & (1 << btn)) != 0
@@ -117,9 +123,12 @@ namespace bluemote {
     /**
      * Stick axis value from -100 to 100.
      * Y is screen-style: down is positive.
+     * @param axis which stick axis to read
      */
     //% block="stick %axis value"
     //% blockId=bluemote_stick_value
+    //% help=github:bluemote/docs/stick-value
+    //% group="Input"
     //% weight=80
     export function stickValue(axis: BlueMoteStick): number {
         switch (axis) {

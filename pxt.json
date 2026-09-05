@@ -1,16 +1,24 @@
 {
     "name": "bluemote",
     "version": "0.0.1",
-    "description": "Receive BlueMote gamepad input over Bluetooth UART",
+    "description": "Receive BlueMote gamepad input over Bluetooth UART on micro:bit v2",
     "license": "MIT",
+    "authors": [
+        "Anton Vanhoucke"
+    ],
     "dependencies": {
         "core": "*",
         "bluetooth": "*"
     },
     "files": [
         "README.md",
-        "bluemote.ts"
+        "LICENSE.txt",
+        "bluemote.ts",
+        "docs/start-service.md",
+        "docs/button-is-pressed.md",
+        "docs/stick-value.md"
     ],
+    "public": true,
     "testFiles": [
         "test.ts"
     ],

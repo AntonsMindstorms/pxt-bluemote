@@ -47,6 +47,8 @@ Y is screen-style: **down is positive**. Invert in your program if the robot sho
 
 Triggers and sliders are received in the packet but are not exposed as blocks yet.
 
+Help pages: [BlueMote service](docs/start-service.md), [button is pressed](docs/button-is-pressed.md), [stick value](docs/stick-value.md).
+
 ## Connecting from the BlueMote app
 
 The micro:bit advertises as `BBC micro:bit [xxxxx]` (the name cannot be changed). BlueMote’s default name filter is `robot`, which will **not** match.
